@@ -1,3 +1,4 @@
+import { CustomComponentName } from "./consts";
 import { CustomComponent } from "./types";
 
 class CounterFormComponent extends HTMLElement implements CustomComponent {
@@ -30,6 +31,14 @@ class CounterFormComponent extends HTMLElement implements CustomComponent {
 
     if (form) {
       form.addEventListener("click", this.onClick);
+    }
+  }
+
+  disconnectedCallback() {
+    const form = this.querySelector("form");
+
+    if (form) {
+      form.removeEventListener("click", this.onClick);
     }
   }
 
@@ -80,10 +89,8 @@ class CounterFormComponent extends HTMLElement implements CustomComponent {
       }
     }
   }
-
-  attributeChangedCallback(): void {}
 }
 
 export function registerCounterForm() {
-  customElements.define("counter-form", CounterFormComponent);
+  customElements.define(CustomComponentName.CounterForm, CounterFormComponent);
 }

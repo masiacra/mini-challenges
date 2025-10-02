@@ -1,5 +1,9 @@
 export interface CustomComponent {
-  connectedCallback(): void;
+  connectedCallback: () => void;
 
-  attributeChangedCallback(): void;
+  disconnectedCallback?: () => void;
+
+  attributeChangedCallback?: () => void;
+
+  adoptedCallback?: () => void;
 }

@@ -5,7 +5,7 @@
   "scripts": {
     "build": "esbuild --bundle src/index.ts --outfile=dist/index.js",
     "watch": "npm run build -- --watch",
-    "start": "npm run build -- --serve=localhost:8000 --servedir=.",
+    "dev": "npm run build -- --serve=localhost:8000 --servedir=. --serve-fallback=index.html",
     "test": ""
   },
   "keywords": [],
