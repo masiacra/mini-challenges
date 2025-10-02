@@ -1,5 +1,5 @@
-import { CustomComponentName } from "./consts";
-import { CustomComponent } from "./types";
+import { CustomComponentName } from "../consts";
+import { CustomComponent } from "../types";
 
 class NotFound extends HTMLElement implements CustomComponent {
   connectedCallback(): void {

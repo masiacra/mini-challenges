@@ -1,5 +1,4 @@
 import { CustomComponentName } from "./consts";
-import { CustomComponent } from "./types";
 
 const RouteDictionary: Record<string, string> = {
   "/counter": CustomComponentName.CounterForm,

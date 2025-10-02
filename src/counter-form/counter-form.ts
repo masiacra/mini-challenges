@@ -1,6 +1,7 @@
-import { CustomComponentName } from "./consts";
-import { CustomComponent } from "./types";
+import { CustomComponentName } from "../consts";
+import { CustomComponent } from "../types";
 
+// TODO: стилизация
 class CounterFormComponent extends HTMLElement implements CustomComponent {
   connectedCallback(): void {
     if (this.querySelector("form")) {

@@ -1,6 +1,6 @@
-import { registerCounterForm } from "./counter-form";
-import { registerNavigateCard } from "./navigate-card";
-import { registerNotFound } from "./not-found";
+import { registerCounterForm } from "./counter-form/counter-form";
+import { registerNavigateCard } from "./navigate-item/navigate-item";
+import { registerNotFound } from "./not-found/not-found";
 import { renderContent } from "./render-content";
 
 function main() {
