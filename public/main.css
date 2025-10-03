@@ -36,6 +36,13 @@ nav {
   row-gap: 1rem;
 }
 
+#root {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
 footer {
   padding: 1rem 0.5rem;
   text-align: center;

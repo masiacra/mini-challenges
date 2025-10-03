@@ -10,7 +10,7 @@ function main() {
 }
 
 document.addEventListener("DOMContentLoaded", main);
-
+renderContent(document.getElementById("root")!, globalThis.location.pathname);
 function handlePopstate() {
   renderContent(document.getElementById("root")!, globalThis.location.pathname);
 }

@@ -1,5 +1,6 @@
 import { CustomComponentName } from "../consts";
 import { CustomComponent } from "../types";
+import styles from "./counter-form.module.css";
 
 // TODO: стилизация
 class CounterFormComponent extends HTMLElement implements CustomComponent {
@@ -9,25 +10,28 @@ class CounterFormComponent extends HTMLElement implements CustomComponent {
     }
 
     this.innerHTML = `
-        <form>
-            <div data-label="value">
+        <form class=${styles.form}>
+            <div class=${styles.value} data-label="value">
                 0
             </div>
             <div>
-                <button data-label="minus" type="button">-</button>
-                <button data-label="plus" type="button">+</button>
+                <button class=${styles.button} data-label="minus" type="button">-</button>
+                <button class=${styles.button} data-label="plus" type="button">+</button>
             </div>
             <label>
                 Increment/Decrement by:
                 <input type="number" value="1" />
             </label>
-            <button data-label="reset" type="reset">
+            <button class=${styles.button} data-label="reset" type="reset">
                 reset
             </button>
-            <div>Keyboard shortcuts: + to increment, - to decrement, Page Up/Down to change step value</div>
+            <div>Keyboard shortcuts: ArrowUp to increment, ArrowDown to decrement, Page Up/Down to change step value</div>
         </form>
     `;
     this.onClick = this.onClick.bind(this);
+    this.onKeyUp = this.onKeyUp.bind(this);
+
+    window.addEventListener("keyup", this.onKeyUp);
     const form = this.querySelector("form");
 
     if (form) {
@@ -36,6 +40,8 @@ class CounterFormComponent extends HTMLElement implements CustomComponent {
   }
 
   disconnectedCallback() {
+    window.removeEventListener("keyup", this.onKeyUp);
+
     const form = this.querySelector("form");
 
     if (form) {
@@ -89,6 +95,32 @@ class CounterFormComponent extends HTMLElement implements CustomComponent {
         }
       }
     }
+  }
+
+  onKeyUp({ key }: KeyboardEvent): void {
+    const form = this.querySelector("form");
+    const input = form?.querySelector('input[type="number"]');
+
+    if (document.activeElement === input) {
+      return;
+    }
+
+    const dict: Record<string, () => void> = {
+      ArrowUp: () => this.setValue(this.value + this.incrementer),
+      ArrowDown: () => this.setValue(this.value - this.incrementer),
+      PageUp: () => {
+        if (input) {
+          input.setAttribute("value", String(this.incrementer + 1));
+        }
+      },
+      PageDown: () => {
+        if (input) {
+          input.setAttribute("value", String(this.incrementer - 1));
+        }
+      },
+    };
+
+    dict[key]?.();
   }
 }
 
